@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: get the code 
         uses: actions/checkout@v4
-      - name: nitialize CodeQL
+      - name: intialize CodeQL
         uses: github/codeql-action/init@v3
         with :
           language: java
