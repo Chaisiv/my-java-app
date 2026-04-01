@@ -1,13 +1,18 @@
 name: pull_request
-on: 
-   pull_request:
+on:
+  pull_request:
     branches:
-        - dev
+      - dev
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - name: get the code 
-              uses: actions/checkout@v4
-            - name: package
-              run: mvn package  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get the code
+        uses: actions/checkout@v4
+      - name: package
+        run: mvn clean package
+      - name: publish the test result
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: "**/target/surefire-report/**/* .xml"   
+          comment_mode: always     
