@@ -1,9 +1,4 @@
 name: pull_request
-
-permissions:
-  checks: write
-  pull-requests: write
-
 on:
   pull_request:
     branches:
@@ -12,12 +7,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: get the code
+      - name: get the code 
         uses: actions/checkout@v4
-      - name: package
-        run: mvn clean package
-      - name: publish the test result
-        uses: EnricoMi/publish-unit-test-result-action@v2
+      - name: nitialize CodeQL
+        uses: github/codeql-action/init@v3
+        with :
+          language: java
+      - name: package the code
+        run: mvn cleane package
+      - name: code quality analysis 
+        uses: github/codeql-action/analyze@v4
+      - name: publish the test result 
+        uses: cloudbees-io-gha/trivy-scan-publish@v2
         with:
-          files: "**/target/surefire-reports/**/**.xml"   
-          comment_mode: always     
+          files: "**/target/surefire-reports/**/*.xml"
+          comment_mode: always
+          
