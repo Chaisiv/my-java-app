@@ -17,7 +17,7 @@ jobs:
         run: |
           echo "${{ toJson(github) }}"
           echo "${{ toJson(vars) }}"  
-        if: github.ref == 'main'
+        if: github.ref == 'refs/heads/main'
 
       - name: get the code
         uses: actions/checkout@v4
