@@ -24,9 +24,8 @@ jobs:
         run: mvn clean package
       - name: code quality analysis 
         uses: github/codeql-action/analyze@v4
-      - name: Publish Test Results
-        uses: dorny/test-reporter@v1 
+      - name: publish the test result 
+        uses: cloudbees-io-gha/trivy-scan-publish@v4
         with:
-          name: Maven Tests
-          path: "**/target/surefire-reports/*.xml"
-          reporter: java-junit
+          files: "**/target/surefire-reports/**/*.xml"
+          comment_mode: always
