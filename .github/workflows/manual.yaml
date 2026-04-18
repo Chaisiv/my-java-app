@@ -7,8 +7,8 @@ jobs:
     steps:
       - name: print context info
         run: 
-            echo " ${{ toJson(github) }}"
-            echo " ${{ toJson(vars) }}"  
+            echo "${{ toJson(github) }}"
+            echo "${{ toJson(vars) }}"  
         if: github.ref == 'main'
 
       - name: get the code
