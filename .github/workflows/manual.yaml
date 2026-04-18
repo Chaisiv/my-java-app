@@ -25,7 +25,7 @@ jobs:
       - name: code quality analysis 
         uses: github/codeql-action/analyze@v4
       - name: publish the test result 
-        uses: cloudbees-io-gha/trivy-scan-publish@v4
+        uses:  EnricoMi/publish-unit-test-result-action@v2
         with:
           files: "**/target/surefire-reports/**/*.xml"
           comment_mode: always
