@@ -18,6 +18,6 @@ jobs:
                 distribution: 'temurin'
             - name: check the java version
               run: java -version
-            - name: build the pcakage
+            - name: build the package
               run: mvn clean package
 
