@@ -1,0 +1,23 @@
+name: matrix-workflow
+on:
+    workflow_dispatch:
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: true
+            matrix:
+                java-version: [17,21]
+        steps:
+            - name: get the code
+              uses: actions/checkout@v4
+            - name: setup java
+              uses: actions/setup-java@v4
+              with:
+                java-version: ${{matrix.java-version}}
+                distribution: 'temurin'
+            - name: check the java version
+              run: java -version
+            - name: build the pcakage
+              run: mvn clean package
+
