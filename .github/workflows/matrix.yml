@@ -3,12 +3,13 @@ on:
     workflow_dispatch:
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: ${{matrix.os}}
         strategy:
             fail-fast: true
             matrix:
                 java-version: [17,21]
                 distribution: ['temurin', 'corretto', 'microsoft']
+                os: ['ubuntu-24.04', 'ubuntu-22.04', 'ubuntu-24.04-arm', 'ubuntu-22.04-arm']
 
         steps:
             - name: get the code
@@ -17,7 +18,7 @@ jobs:
               uses: actions/setup-java@v4
               with:
                 java-version: ${{matrix.java-version}}
-                distribution: 'temurin'
+                distribution: ${{matrix.distribution}}
             - name: check the java version
               run: java -version
             - name: build the package
